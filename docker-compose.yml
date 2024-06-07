@@ -20,7 +20,10 @@ services:
       - kafka
 
   emqx-exporter:
-    image: emqx/emqx-exporter
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: emqx-exporter
     container_name: emqx-exporter
     ports:
       - 8085:8085
@@ -99,6 +102,16 @@ services:
       - 2181:2181
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
+
+  redpanda-console:
+    image: docker.redpanda.com/redpandadata/console:v2.3.10
+    container_name: renpanda-console
+    environment:
+      - KAFKA_BROKERS=kafka:9092
+    ports:
+      - 8200:8080
+    depends_on:
+      - kafka
 
 networks:
   emqx-net:
