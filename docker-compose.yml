@@ -21,7 +21,7 @@ services:
 
   emqx-exporter:
     build:
-      context: .
+      context: emqx-exporter
       dockerfile: Dockerfile
     image: emqx-exporter
     container_name: emqx-exporter
